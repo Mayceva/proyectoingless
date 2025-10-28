@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Count the Animals (Text Input)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .cloud {
+      position: absolute;
+      top: 50px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 20s linear infinite;
+    }
+
+    .cloud1 { width: 150px; height: 80px; left: -200px; animation-delay: 0s; }
+    .cloud2 { width: 100px; height: 60px; top: 120px; left: -150px; animation-delay: 10s; }
+    .cloud3 { width: 180px; height: 100px; top: 180px; left: -300px; animation-delay: 5s; }
+
+    @keyframes float {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(120vw); }
+    }
+
+    h1 {
+      color: #ff4081;
+      padding-top: 30px;
+      font-size: 36px;
+      text-shadow: 1px 1px 3px #fff;
+    }
+
+    p {
+      font-size: 20px;
+      color: #4e342e;
+    }
+
+    .animal-display {
+      font-size: 48px;
+      margin: 20px 0;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 20px;
+      width: 150px;
+      text-align: center;
+      border-radius: 10px;
+      border: 3px solid #ffb74d;
+      background: #fff8e1;
+      color: #4e342e;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #ffca28;
+      color: #4e342e;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffb300;
+    }
+
+    .message {
+      font-size: 28px;
+      margin-top: 30px;
+      color: #388e3c;
+      display: none;
+      animation: pop 0.8s ease-in-out forwards;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 16px;
+      color: #6d4c41;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating clouds -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+
+  <h1>🧮 Count the Animals!</h1>
+  <p>Type the number in English (e.g., <strong>three</strong>, <strong>seven</strong>)</p>
+
+  <div class="animal-display" id="animalDisplay">🐶🐶🐶</div>
+
+  <input type="text" id="userInput" placeholder="e.g. three">
+  <br>
+  <button onclick="checkAnswer()">Submit</button>
+
+  <div class="message" id="finalMessage">You did it! 🎉 Great job!</div>
+
+  <footer>&copy; 2025 Fun English · Count the Animals</footer>
+
+  <script>
+    const animalEmojis = ["🐶", "🐱", "🐭", "🐰", "🦊", "🐻", "🐎", "🐵", "🦁", "🐸"];
+    const numberWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    
+    let correctCount = 0;
+    let totalRounds = 10;
+    let currentAnswer = 0;
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateExercise() {
+      const animal = animalEmojis[Math.floor(Math.random() * animalEmojis.length)];
+      const count = getRandomInt(1, 9);
+      currentAnswer = count;
+
+      const display = document.getElementById("animalDisplay");
+      display.textContent = animal.repeat(count);
+      document.getElementById("userInput").value = "";
+    }
+
+    function checkAnswer() {
+      const userInput = document.getElementById("userInput").value.trim().toLowerCase();
+      const correctWord = numberWords[currentAnswer];
+
+      if (userInput === correctWord) {
+        correctCount++;
+        if (correctCount >= totalRounds) {
+          document.getElementById("finalMessage").style.display = "block";
+        } else {
+          generateExercise();
+        }
+      } else {
+        alert("Oops! Try again 😊");
+      }
+    }
+
+    // Start the game
+    generateExercise();
+  </script>
+
+</body>
+</html>

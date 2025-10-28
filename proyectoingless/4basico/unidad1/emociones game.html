@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Match Emotions with Emojis</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background: #f0f8ff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #ff6347;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .draggable, .droppable {
+      padding: 15px;
+      margin: 10px;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      width: 120px;
+      font-size: 24px;
+      background-color: #fff;
+      cursor: grab;
+      transition: background-color 0.3s ease;
+    }
+
+    .droppable {
+      background-color: #f9f9f9;
+      font-size: 40px;
+      cursor: default;
+    }
+
+    .matched {
+      background-color: #90ee90 !important;
+      border-color: #2e8b57;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 2em;
+      color: green;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎈 Match the Emotion with the Emoji 🎈</h1>
+
+  <div class="container" id="emotions">
+    <div class="draggable" draggable="true" id="Happy">Happy</div>
+    <div class="draggable" draggable="true" id="Sad">Sad</div>
+    <div class="draggable" draggable="true" id="Anger">Anger</div>
+    <div class="draggable" draggable="true" id="Fear">Fear</div>
+    <div class="draggable" draggable="true" id="Love">Love</div>
+    <div class="draggable" draggable="true" id="Tired">Tired</div>
+  </div>
+
+  <div class="container" id="emojis">
+    <div class="droppable" data-emotion="Happy">😀</div>
+    <div class="droppable" data-emotion="Sad">😢</div>
+    <div class="droppable" data-emotion="Anger">😡</div>
+    <div class="droppable" data-emotion="Fear">😱</div>
+    <div class="droppable" data-emotion="Love">❤️</div>
+    <div class="droppable" data-emotion="Tired">😴</div>
+  </div>
+
+  <div id="result">🎉 Great job! You matched all the emotions! 🎉</div>
+
+  <script>
+    // Mezclar emociones aleatoriamente
+    function shuffleEmotions() {
+      const container = document.getElementById("emotions");
+      const children = Array.from(container.children);
+      for (let i = children.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        container.appendChild(children[j]);
+        children.splice(j, 1);
+      }
+    }
+
+    shuffleEmotions(); // Mezclar al cargar
+
+    let matchedCount = 0;
+
+    document.querySelectorAll(".draggable").forEach(item => {
+      item.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text", e.target.id);
+      });
+    });
+
+    document.querySelectorAll(".droppable").forEach(zone => {
+      zone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+
+      zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const draggedId = e.dataTransfer.getData("text");
+        const expectedEmotion = zone.getAttribute("data-emotion");
+
+        if (draggedId === expectedEmotion && !zone.classList.contains("matched")) {
+          zone.classList.add("matched");
+          zone.textContent += ` ${draggedId}`;
+          document.getElementById(draggedId).style.display = "none";
+          matchedCount++;
+
+          if (matchedCount === 6) {
+            document.getElementById("result").style.display = "block";
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+@font-face {
+  font-family: 'Flatory Slab Condensed';
+  src: url('FlatorySlabCondensed.ttf');
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #265219e7;
+  margin: 0;
+  padding: 20px;
+  align-items: center;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: #701e1ee0;
+  font-family: 'Flatory Slab Condensed', sans-serif;
+}
+
+
+
+iframe {
+  width: 100%;
+  max-width: 795px;
+  height: 690px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(228, 38, 193, 0.2);
+}
+
+/* Top bar */
+.top-bar {
+
+  padding: 10px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1000;
+  gap: 10px;
+}
+
+.logo-container img {
+  height: 10px;
+}
+
+.main-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-nav ul.menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav ul.menu > li {
+  position: relative;
+}
+
+.main-nav ul.menu > li > a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 12px 0;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.main-nav ul.menu > li > a:hover {
+  color: #97ce31;
+}
+
+/* Mega menú */
+.has-dropdown:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+}
+
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  display: flex;
+  gap: 40px;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  min-width: 500px;
+  z-index: 999;
+}
+
+.mega-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.mega-column h4 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #87d132;
+}
+
+.mega-column a {
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.mega-column a:hover {
+  color: #a479bd;
+}
+
+/* Botón menú */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #003d6a;
+}
+
+/* Logo hero */
+.hero-logo-container {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hero-logo {
+  height: 60px;
+  width: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+.hero-title {
+  font-size: 2rem;
+  color: #fff;
+}
+
+/* Card con logo */
+.card-content-with-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-dove-left {
+  flex: 0 0 40%;
+  max-width: 450px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logo-dove-left img {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 80%;
+  border-radius: 12px;
+}
+
+/* Submenús */
+.has-submenu {
+  position: relative;
+}
+
+
+
+.has-submenu:hover .submenu {
+  display: block;
+}
+
+.submenu li {
+  margin: 5px 0;
+}
+
+.submenu a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 5px;
+}
+
+.submenu a:hover {
+  background: #a3d34b;
+}
+
+/* Estilos menú */
+#menu-container a {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 12px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+#menu-container a:hover {
+  background-color: #95cc2ed0;
+  color: #0a0505;
+}
+
+/* Carrusel */
+.carousel {
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-inner img {
+  height: 90vh;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.hero-logo-container,
+#menu-container,
+h1, h2, h3 {
+  position: relative;
+  z-index: 10;
+}
+
+#menu-container {
+  background: rgba(26, 88, 59, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Modal */
+.modal {
+  z-index: 2000; 
+}
+
+.historia-card {
+  background-color: #fff;
+  border: 4px solid #000; /* borde negro */
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+  margin: 30px auto;
+  box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.historia-title {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.historia-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.historia-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.carousel-item img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin: auto; 
+    animation: fadeIn 1s ease-in-out;          /* centra las imágenes */
+}
+.carousel-item img {
+  width: 100%;            /* que ocupe todo el ancho del carrusel */
+  height: 300px;          /* altura fija, cámbiala según lo que necesites */
+  object-fit: cover;      /* recorta la imagen sin deformarla */
+  border-radius: 10px;    /* opcional: bordes redondeados */
+}
+
+.cursos-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #d0c8b1, #c9d08ff5);
+    animation: fadeIn 1s ease-in-out;
+}
+
+
+
+.cursos-header h1 {
+  font-size: 3.4rem;
+  color: #000000;
+  margin-bottom: 10px;
+  text-shadow: 8px 8px 12px rgba(0,0,0,0.1);
+}
+
+
+
+
+
+
+
+
+@keyframes flotar {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.intro-img {
+  width: 100%;
+  height: 380px; /* todas las imágenes del mismo alto */
+  object-fit: cover;
+}
+
+.contacto-section {
+  background: linear-gradient(135deg, #f3f4f6, #ffffff);
+  border-top: 5px solid #1a237e;
+  border-radius: 20px 20px 0 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.contact-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 20px;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.contact-img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border: 3px solid #1a237e;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.contact-card {
+  background: #fffbea;
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+.contact-img {
+  transition: transform 0.3s ease;
+}
+.contact-card:hover .contact-img {
+  transform: scale(1.05);
+}
+
+
+
+
+

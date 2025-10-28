@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Separar Frutas y Verduras</title>
+    <link rel="stylesheet" href="/2/4unidad/css/frutas2.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #e0ffe7 0%, #f7eaff 100%);
+            min-height: 100vh;
+        }
+        h2 {
+            text-align: center;
+            color: #8f00ff;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            font-size: 2em;
+            letter-spacing: 1px;
+        }
+        .alimentos {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .alimentos img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            background: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: grab;
+        }
+        .alimentos img:active {
+            cursor: grabbing;
+        }
+        .alimentos img.usado {
+            opacity: 0.5;
+            filter: grayscale(0.7);
+        }
+        .canastos-area {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .canasto {
+            width: 220px;
+            height: 180px;
+            border-radius: 0 0 60px 60px/0 0 100px 100px;
+            background: linear-gradient(180deg, #ffe0b2 60%, #b8860b 100%);
+            border: 4px solid #8B4513;
+            box-shadow: 0 8px 24px rgba(139,69,19,0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .canasto img {
+            width: 90px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 2px 6px #b8860b55);
+        }
+        .canasto-label {
+            font-weight: bold;
+            color: #fff;
+            background: #8B4513;
+            padding: 8px 18px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px #b8860b33;
+        }
+        .canasto-frutas {
+            background: linear-gradient(180deg, #ffe0b2 60%, #ffb6c1 100%);
+            border-color: #e75480;
+        }
+        .canasto-verduras {
+            background: linear-gradient(180deg, #eaffea 60%, #388e3c 100%);
+            border-color: #388e3c;
+        }
+        #mensaje {
+            font-size: 1.3em;
+            color: #388e3c;
+            font-weight: bold;
+            text-align: center;
+            min-height: 2em;
+            margin-bottom: 30px;
+            transition: color 0.3s;
+        }
+        /* Efecto al soltar */
+        .canasto.soltando {
+            box-shadow: 0 0 0 6px #8f00ff55;
+        }
+    </style>
+</head>
+<body>
+    <h2>Arrastra cada alimento al canasto correcto</h2>
+    <p style="text-align:center; font-size:1.2em; color:#444; margin-bottom: 18px;">
+        ¡Demuestra tus conocimientos! Separa las frutas y verduras arrastrando cada una a su canasto correspondiente.
+    </p>
+    <div class="alimentos">
+        <img src="/2/4unidad/img/manzana.jpg" alt="Manzana" draggable="true" id="manzana" data-tipo="fruta">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg" alt="Banana" draggable="true" id="banana" data-tipo="fruta">
+        <img src="/2/4unidad/img/naranja.jpg" alt="Naranja" draggable="true" id="naranja" data-tipo="fruta">
+        <img src="/2/4unidad/img/zanahoria.jpg" alt="Zanahoria" draggable="true" id="zanahoria" data-tipo="verdura">
+        <img src="/2/4unidad/img/lechuga.jpg" alt="Lechuga" draggable="true" id="lechuga" data-tipo="verdura">
+        <img src="/2/4unidad/img/brocoli.jpg" alt="Brócoli" draggable="true" id="brocoli" data-tipo="verdura">
+    </div>
+
+    <div class="canastos-area">
+        <!-- Canasto de Frutas -->
+        <div id="canasto-frutas"
+            class="canasto canasto-frutas"
+            ondragover="event.preventDefault(); this.classList.add('soltando');"
+            ondragleave="this.classList.remove('soltando');"
+            ondrop="soltarEnCanasto(event, 'fruta'); this.classList.remove('soltando');">
+            <img src="/2/4unidad/img/canastoos.webp" alt="Canasto Frutas">
+            <div class="canasto-label">Canasto de Frutas</div>
+        </div>
+        <!-- Canasto de Verduras -->
+        <div id="canasto-verduras"
+            class="canasto canasto-verduras"
+            ondragover="event.preventDefault(); this.classList.add('soltando');"
+            ondragleave="this.classList.remove('soltando');"
+            ondrop="soltarEnCanasto(event, 'verdura'); this.classList.remove('soltando');">
+            <img src="/2/4unidad/img/canastoos.webp" alt="Canasto Verduras">
+            <div class="canasto-label">Canasto de Verduras</div>
+        </div>
+    </div>
+
+    <div id="mensaje"></div>
+
+    <script>
+    const nombres = {
+        "manzana": "Manzana",
+        "banana": "Banana",
+        "naranja": "Naranja",
+        "zanahoria": "Zanahoria",
+        "lechuga": "Lechuga",
+        "brocoli": "Brócoli"
+    };
+
+    let frutasCorrectas = 0;
+    let verdurasCorrectas = 0;
+    const totalFrutas = 3;
+    const totalVerduras = 3;
+
+    document.querySelectorAll('img[draggable="true"]').forEach(img => {
+        img.addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData("text/plain", e.target.id);
+        });
+    });
+
+    function soltarEnCanasto(event, tipoCanasto) {
+        event.preventDefault();
+        const frutaId = event.dataTransfer.getData("text/plain");
+        const elemento = document.getElementById(frutaId);
+        const tipo = elemento.getAttribute('data-tipo');
+        const nombre = nombres[frutaId];
+
+        if (tipo === tipoCanasto) {
+            if (!elemento.classList.contains('usado')) {
+                elemento.classList.add('usado');
+                if (tipoCanasto === 'fruta') frutasCorrectas++;
+                if (tipoCanasto === 'verdura') verdurasCorrectas++;
+                document.getElementById("mensaje").textContent = `¡Correcto! ${nombre} es una ${tipoCanasto}.`;
+            }
+        } else {
+            document.getElementById("mensaje").textContent = `¡Ups! ${nombre} no es una ${tipoCanasto}.`;
+            document.getElementById("mensaje").style.color = "#e75480";
+            setTimeout(() => {
+                document.getElementById("mensaje").style.color = "#388e3c";
+            }, 1200);
+        }
+
+        // Mensaje final si termina el juego
+        if (frutasCorrectas === totalFrutas && verdurasCorrectas === totalVerduras) {
+            document.getElementById("mensaje").textContent = "¡Felicidades! Has separado correctamente todas las frutas y verduras.";
+        }
+    }
+    </script>
+</body>
+</html>

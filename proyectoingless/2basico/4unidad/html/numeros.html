@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números del 1 al 20</title>
+    <link rel="stylesheet" href="/2/4unidad/css/numeros.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0 0 40px 0;
+            background: #e3f2fd;
+            color: #222;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px #90caf955;
+            padding: 32px 28px 28px 28px;
+        }
+        h1 {
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .nums-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .num-card {
+            background: #bbdefb;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1976d2;
+            box-shadow: 0 2px 8px #90caf955;
+            min-width: 48px;
+            text-align: center;
+        }
+        .explicacion {
+            margin-bottom: 28px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .juego-numeros {
+            margin-top: 36px;
+            background: #e3f2fd;
+            border-radius: 12px;
+            padding: 24px 18px;
+            box-shadow: 0 2px 8px #90caf955;
+            text-align: center;
+        }
+        .juego-numeros input[type="number"] {
+            font-size: 1.2em;
+            width: 60px;
+            padding: 6px;
+            border-radius: 6px;
+            border: 1px solid #1976d2;
+            margin-right: 10px;
+        }
+        .juego-numeros button {
+            font-size: 1.1em;
+            padding: 7px 18px;
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .juego-numeros button:hover {
+            background: #0d47a1;
+        }
+        #juego-mensaje {
+            margin-top: 18px;
+            font-size: 1.1em;
+            font-weight: bold;
+            min-height: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Los Números del 1 al 20</h1>
+        <div class="explicacion">
+            <p>
+                Los números nos ayudan a contar, ordenar y conocer la cantidad de cosas que tenemos. Aquí tienes los números del 1 al 20, ¡vamos a aprenderlos juntos!
+            </p>
+        </div>
+        <div class="nums-list">
+            <div class="num-card">1<br><span style="font-size:0.8em;">uno</span></div>
+            <div class="num-card">2<br><span style="font-size:0.8em;">dos</span></div>
+            <div class="num-card">3<br><span style="font-size:0.8em;">tres</span></div>
+            <div class="num-card">4<br><span style="font-size:0.8em;">cuatro</span></div>
+            <div class="num-card">5<br><span style="font-size:0.8em;">cinco</span></div>
+            <div class="num-card">6<br><span style="font-size:0.8em;">seis</span></div>
+            <div class="num-card">7<br><span style="font-size:0.8em;">siete</span></div>
+            <div class="num-card">8<br><span style="font-size:0.8em;">ocho</span></div>
+            <div class="num-card">9<br><span style="font-size:0.8em;">nueve</span></div>
+            <div class="num-card">10<br><span style="font-size:0.8em;">diez</span></div>
+            <div class="num-card">11<br><span style="font-size:0.8em;">once</span></div>
+            <div class="num-card">12<br><span style="font-size:0.8em;">doce</span></div>
+            <div class="num-card">13<br><span style="font-size:0.8em;">trece</span></div>
+            <div class="num-card">14<br><span style="font-size:0.8em;">catorce</span></div>
+            <div class="num-card">15<br><span style="font-size:0.8em;">quince</span></div>
+            <div class="num-card">16<br><span style="font-size:0.8em;">dieciséis</span></div>
+            <div class="num-card">17<br><span style="font-size:0.8em;">diecisiete</span></div>
+            <div class="num-card">18<br><span style="font-size:0.8em;">dieciocho</span></div>
+            <div class="num-card">19<br><span style="font-size:0.8em;">diecinueve</span></div>
+            <div class="num-card">20<br><span style="font-size:0.8em;">veinte</span></div>
+        </div>
+        <div class="explicacion">
+            <ul>
+                <li><b>1-5:</b> Son los primeros números que aprendemos. Por ejemplo: 1 sol, 2 manos, 3 pelotas, 4 gatos, 5 dedos.</li>
+                <li><b>6-10:</b> Nos ayudan a contar más cosas. Por ejemplo: 6 flores, 7 días de la semana, 8 patas de una araña, 9 planetas, 10 caramelos.</li>
+                <li><b>11-20:</b> Son los números que siguen después del 10. Por ejemplo: 11 lápices, 12 meses del año, 13 pelotas, 14 estrellas, 15 globos, 16 coches, 17 libros, 18 árboles, 19 peces, 20 amigos.</li>
+            </ul>
+            <p>
+                ¡Practica diciendo los números en voz alta y busca cosas a tu alrededor para contar!
+            </p>
+        </div>
+        <div class="juego-numeros">
+            <h2>Juego: ¿Qué número es?</h2>
+            <p>Elige el número correcto según la cantidad de objetos que ves.</p>
+            <div id="juego-pregunta" style="font-size:1.2em; margin-bottom:12px;"></div>
+            <input type="number" id="respuesta" min="1" max="20" autocomplete="off" />
+            <button onclick="verificarRespuesta()">Comprobar</button>
+            <div id="juego-mensaje"></div>
+        </div>
+    </div>
+    <script>
+        // Preguntas para el juego (cantidad y objeto)
+        const preguntas = [
+            { cantidad: 3, objeto: "manzanas" },
+            { cantidad: 7, objeto: "pelotas" },
+            { cantidad: 1, objeto: "sol" },
+            { cantidad: 10, objeto: "caramelos" },
+            { cantidad: 5, objeto: "dedos" },
+            { cantidad: 12, objeto: "meses del año" },
+            { cantidad: 8, objeto: "patas de una araña" },
+            { cantidad: 15, objeto: "globos" },
+            { cantidad: 20, objeto: "amigos" },
+            { cantidad: 2, objeto: "ojos" },
+            { cantidad: 6, objeto: "flores" },
+            { cantidad: 9, objeto: "planetas" },
+            { cantidad: 4, objeto: "gatos" },
+            { cantidad: 13, objeto: "pelotas" },
+            { cantidad: 11, objeto: "lápices" },
+            { cantidad: 14, objeto: "estrellas" },
+            { cantidad: 16, objeto: "coches" },
+            { cantidad: 17, objeto: "libros" },
+            { cantidad: 18, objeto: "árboles" },
+            { cantidad: 19, objeto: "peces" }
+        ];
+
+        let preguntaActual = 0;
+
+        function mostrarPregunta() {
+            const p = preguntas[preguntaActual];
+            document.getElementById('juego-pregunta').textContent = `¿Cuántos ${p.objeto} hay?`;
+            document.getElementById('respuesta').value = '';
+            document.getElementById('juego-mensaje').textContent = '';
+        }
+
+        function verificarRespuesta() {
+            const p = preguntas[preguntaActual];
+            const valor = parseInt(document.getElementById('respuesta').value, 10);
+            if (valor === p.cantidad) {
+                document.getElementById('juego-mensaje').textContent = '¡Muy bien! ¡Respuesta correcta!';
+                document.getElementById('juego-mensaje').style.color = '#388e3c';
+                setTimeout(() => {
+                    preguntaActual = (preguntaActual + 1) % preguntas.length;
+                    mostrarPregunta();
+                }, 1200);
+            } else {
+                document.getElementById('juego-mensaje').textContent = 'Intenta de nuevo 😊';
+                document.getElementById('juego-mensaje').style.color = '#e57373';
+            }
+        }
+
+        // Iniciar el juego al cargar
+        window.onload = mostrarPregunta;
+    </script>
+</body>
+</html>

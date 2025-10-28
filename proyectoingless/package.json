@@ -1,0 +1,26 @@
+{
+  "name": "ven-aprende-con-kronos-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mayceva/VEN-APRENDE-CON-KRONOS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mayceva/VEN-APRENDE-CON-KRONOS/issues"
+  },
+  "homepage": "https://github.com/Mayceva/VEN-APRENDE-CON-KRONOS#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}

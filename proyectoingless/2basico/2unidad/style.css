@@ -1,0 +1,46 @@
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  background-color: #00d9ff;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.game-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.words, .colors {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.draggable {
+  background-color: #ffffff;
+  border: 2px dashed #22681c;
+  padding: 10px 20px;
+  cursor: grab;
+  border-radius: 8px;
+  font-size: 1.2em;
+}
+
+.dropzone {
+  width: 120px;
+  height: 60px;
+  border: 3px solid #333;
+  border-radius: 10px;
+}
+
+#message {
+  margin-top: 30px;
+  font-size: 1.5em;
+  color: green;
+}

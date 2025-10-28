@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2° Básico – Unit 3 • Mega Interactive Lab</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root{
+      --grad-a:#ffe6f0; --grad-b:#e6f7ff; --brand:#ff4d6d; --ink:#1f295a; --ok:#2ecc71; --warn:#f39c12; --info:#0dcaf0;
+    }
+    html,body{height:100%;}
+    body{background:linear-gradient(120deg,var(--grad-a),var(--grad-b));font-family:"Comic Sans MS", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;margin:0;}
+    .navbar{box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .title{color:var(--brand)}
+    .card{cursor:pointer;transition:transform .25s, box-shadow .25s;border-radius:18px}
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,.12)}
+    .section{display:none;margin-top:28px}
+    .section.active{display:block}
+    .section-header{font-size:28px;font-weight:800;margin:8px 0 18px 0}
+    .vocab-img{width:120px;height:120px;border-radius:14px;object-fit:cover;border:4px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .character{font-size:42px}
+    .pill{display:inline-block;background:#fff;padding:4px 10px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.1);}
+    .game-box{background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+    .btn-fat{padding:.8rem 1.1rem;border-radius:12px}
+
+    /* Drag & Drop (Match Occupation to Place) */
+    .drag-item{user-select:none}
+    .drop-zone{border:2px dashed #c5d0f7;border-radius:12px;min-height:70px;padding:8px;background:#f7f9ff}
+    .drop-zone.correct{border-color:#38c172;background:#eafff1}
+    .drop-zone.wrong{border-color:#e74c3c;background:#fff1f1}
+
+    /* Pronoun & Actions Quiz */
+    .chip{display:inline-block;padding:.4rem .8rem;border-radius:999px;background:#eef2ff;border:1px solid #cdd6ff;margin:.2rem;cursor:pointer}
+    .chip.selected{background:#cfe7ff;border-color:#89c2ff}
+
+    /* Numbers game */
+    .grid20{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .num-card{background:#fff;border-radius:14px;padding:14px;font-size:24px;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,.08);cursor:pointer}
+    .num-card.good{outline:3px solid #2ecc71}
+    .num-card.bad{outline:3px solid #e74c3c}
+
+    /* Mouse Collect Game */
+    #arena{position:relative;height:320px;border-radius:20px;background:linear-gradient(180deg,#fff,#f2fbff);overflow:hidden;border:3px solid #e0f1ff}
+    #player{position:absolute;width:34px;height:34px;border-radius:50%;background:#ff7aa8;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+    .star{position:absolute;width:20px;height:20px;border-radius:50%;background:#ffd54f;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+    #hud{display:flex;gap:12px}
+
+    /* Dress-up game */
+    #dress-area{position:relative;height:340px;background:#fefefe;border:2px dashed #ffd1dc;border-radius:16px}
+    #avatar{position:absolute;left:40%;top:30px;width:160px;height:260px;background:linear-gradient(#ffe0ea,#fff);border-radius:90px 90px 40px 40px/120px 120px 40px 40px;border:3px solid #ffc0cb}
+    .cloth{width:90px;height:60px;border-radius:12px;background:#d0ecff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,.12);cursor:grab}
+    .cloth.hat{background:#ffeaa7}
+    .cloth.shirt{background:#a0e7e5}
+    .cloth.shoes{background:#b4f8c8}
+    #drop-hat,#drop-shirt,#drop-shoes{position:absolute;border:2px dashed #bbb;border-radius:12px}
+    #drop-hat{left:44%;top:-10px;width:80px;height:40px}
+    #drop-shirt{left:41%;top:120px;width:120px;height:70px}
+    #drop-shoes{left:43%;bottom:12px;width:120px;height:40px}
+    .slot-ok{border-color:#2ecc71;background:#eafff1}
+
+    /* Connect Pairs (click-left then click-right) */
+    .pair-board{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .pair-item{background:#fff;padding:10px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer}
+    svg#lineLayer{position:absolute;inset:0;pointer-events:none}
+
+    /* NEW: Memory Cards */
+    .memory-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+    .card-mem{position:relative;height:110px;border-radius:12px;transform-style:preserve-3d;transition:transform .3s;cursor:pointer}
+    .card-mem.flipped{transform:rotateY(180deg)}
+    .face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;backface-visibility:hidden}
+    .front{background:#dfe7fd}
+    .back{background:#ffe5ec;transform:rotateY(180deg);font-size:28px}
+
+    /* NEW: Sentence Builder */
+    .word{display:inline-block;margin:6px;padding:8px 12px;background:#fff;border:1px dashed #b8c0ff;border-radius:999px;cursor:grab}
+    .sentence-drop{min-height:56px;border:2px dashed #b8c0ff;border-radius:12px;padding:6px;background:#f7f9ff}
+
+    /* API Dictionary */
+    .def-box{background:#fff;padding:12px;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+
+    /* Code blocks (kept for styling consistency) */
+    pre.code{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:12px;overflow:auto}
+
+    @media (max-width: 768px){
+      .grid20{grid-template-columns:repeat(4,1fr)}
+      #avatar{left:32%}
+      #drop-hat{left:38%} #drop-shirt{left:31%} #drop-shoes{left:35%}
+      .memory-grid{grid-template-columns:repeat(3,1fr)}
+    }
+  </style>
+</head>
+ <div class="button-container">
+       <button class="button" onclick="window.location.href='/index.html'">
+      <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1024 1024" stroke-width="0" fill="currentColor" stroke="currentColor" class="icon">
+        <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path>
+      </svg>
+    </button>
+<body>
+  <!-- NAV -->
+  <nav class="navbar navbar-expand bg-danger sticky-top">
+    <div class="container-fluid">
+      <span class="navbar-brand text-white fw-bold">2° Medio – Unit 3 · Everyday Life! (Mega Upgrade)</span>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <button class="btn btn-light btn-sm" data-bs-toggle="offcanvas" data-bs-target="#help">📖 Instrucciones</button>
+        <button id="btnMusic" class="btn btn-outline-light btn-sm">⏸ Música</button>
+        <a href="#" class="btn btn-light btn-sm" onclick="location.reload()">↻ Reset</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- OFFCANVAS HELP -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="help">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Guía rápida</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small">
+      <ol class="lh-lg">
+        <li><b>Vocabulary:</b> mira las imágenes y escucha la pronunciación.</li>
+        <li><b>Drag & Drop:</b> arrastra el trabajo hacia el lugar correcto y presiona <i>Check</i>.</li>
+        <li><b>Pronouns:</b> elige <i>He/She/They</i> según la oración.</li>
+        <li><b>Numbers:</b> haz clic en el número que se dice. Llega a 10 aciertos.</li>
+        <li><b>Mouse Game:</b> mueve el mouse dentro de la caja para juntar ⭐.</li>
+        <li><b>Dress Up:</b> arrastra ropa hacia el avatar para crear oraciones.</li>
+        <li><b>Connect:</b> toca un trabajo (izq) y luego su lugar (der) para unirlos.</li>
+        <li><b>Memory:</b> encuentra pares (emoji ↔ palabra). 8 pares ganan.</li>
+        <li><b>Sentence Builder:</b> arrastra palabras para formar la oración correcta.</li>
+        <li><b>Dictionary (API):</b> busca definiciones en vivo (inglés).</li>
+      </ol>
+      <p class="text-muted">Consejo: Activa el sonido para una mejor experiencia. 🎧</p>
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <div class="container text-center mt-4">
+    <h2 class="title">Welcome to Unit 3 – Learn, drag, match & play! 🎉</h2>
+    <p class="lead">Occupations, places, actions, pronouns and numbers 1–20. Click a card to open a section.</p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="container mt-3">
+    <div class="row g-4">
+      <div class="col-6 col-md-3"><div class="card border-primary h-100" onclick="show('vocab')"><div class="card-body text-center"><h5 class="card-title">🗣 Vocabulary</h5><p class="card-text">Words & pictures</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-success h-100" onclick="show('dragmatch')"><div class="card-body text-center"><h5 class="card-title">🎮 Drag & Drop</h5><p class="card-text">Match jobs → places</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-warning h-100" onclick="show('pronouns')"><div class="card-body text-center"><h5 class="card-title">👤 Pronouns</h5><p class="card-text">He / She / They</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-info h-100" onclick="show('numbers')"><div class="card-body text-center"><h5 class="card-title">🔢 Numbers</h5><p class="card-text">Click 1–20</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-secondary h-100" onclick="show('mousegame')"><div class="card-body text-center"><h5 class="card-title">🖱️ Mouse Game</h5><p class="card-text">Collect the stars</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-danger h-100" onclick="show('dressup')"><div class="card-body text-center"><h5 class="card-title">👗 Dress Up</h5><p class="card-text">Clothes & actions</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-dark h-100" onclick="show('connect')"><div class="card-body text-center"><h5 class="card-title">🔗 Connect</h5><p class="card-text">Click pairs (job/place)</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-dark-subtle h-100" onclick="show('memory')"><div class="card-body text-center"><h5 class="card-title">🧠 Memory</h5><p class="card-text">Match emoji ↔ word</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-secondary-subtle h-100" onclick="show('sentence')"><div class="card-body text-center"><h5 class="card-title">✍️ Sentence Builder</h5><p class="card-text">Drag words</p></div></div></div>
+      <div class="col-6 col-md-3"><div class="card border-success-subtle h-100" onclick="show('dictionary')"><div class="card-body text-center"><h5 class="card-title">🔎 Dictionary (API)</h5><p class="card-text">Live definitions</p></div></div></div>
+    </div>
+  </div>
+
+  <div class="container my-4">
+    <!-- VOCABULARY -->
+    <section id="vocab" class="section">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3 class="section-header text-primary mb-0">📚 Vocabulary</h3>
+        <button class="btn btn-outline-primary btn-sm" onclick="playAllVocab()"><i class="bi bi-megaphone"></i> Listen All</button>
+      </div>
+      <div class="row g-4 mt-1">
+        <!-- Occupations -->
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👩‍🏫</div>
+          <img class="vocab-img" src="https://i.pinimg.com/736x/69/45/01/6945015ecb9867fff7d5e0c1196f9d5a.jpg" alt="Teacher" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('teacher')">🔊 teacher</button></p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👨‍🌾</div>
+          <img class="vocab-img" src="https://static.vecteezy.com/system/resources/thumbnails/004/985/994/small_2x/cartoon-farmer-with-farmland-background-free-vector.jpg" alt="Farmer" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('farmer')">🔊 farmer</button></p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👩‍⚕️</div>
+          <img class="vocab-img" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=300&auto=format&fit=crop" alt="Nurse" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('nurse')">🔊 nurse</button></p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👩‍🍳</div>
+          <img class="vocab-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=300&auto=format&fit=crop" alt="Cook" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('cook')">🔊 cook</button></p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👮‍♂️</div>
+          <img class="vocab-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=300&auto=format&fit=crop" alt="Police officer" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('police officer')">🔊 police officer</button></p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">✈️</div>
+          <img class="vocab-img" src="https://img.freepik.com/vector-gratis/tema-vacaciones-viaje-piloto-feliz-avion_1308-93260.jpg" alt="Pilot" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('pilot')">🔊 pilot</button></p>
+        </div>
+        <!-- Places & actions -->
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">🏫</div>
+          <img class="vocab-img" src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=300&auto=format&fit=crop" alt="School" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('school')">🔊 school</button></p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">🏥</div>
+          <img class="vocab-img" src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?q=80&w=300&auto=format&fit=crop" alt="Hospital" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('hospital')">🔊 hospital</button></p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">🍽️</div>
+          <img class="vocab-img" src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?q=80&w=300&auto=format&fit=crop" alt="Restaurant" />
+          <p class="mt-2"><button class="btn btn-sm btn-light" onclick="speak('restaurant')">🔊 restaurant</button></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DRAG & DROP MATCH: job → place -->
+    <section id="dragmatch" class="section">
+      <h3 class="section-header text-success">🎯 Drag & Drop · Match the job with the place</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Arrastra cada trabajo hacia su lugar. Luego pulsa <b>Check</b>.</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="game-box">
+            <p class="mb-2"><strong>Drag these jobs:</strong></p>
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="school">Teacher 👩‍🏫</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="farm">Farmer 👨‍🌾</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="hospital">Nurse 👩‍⚕️</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="restaurant">Cook 👩‍🍳</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="police">Police officer 👮‍♂️</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="game-box">
+            <p class="mb-2"><strong>Drop on the correct place:</strong></p>
+            <div class="mb-2">🏫 School
+              <div class="drop-zone" data-place="school"></div>
+            </div>
+            <div class="mb-2">🏥 Hospital
+              <div class="drop-zone" data-place="hospital"></div>
+            </div>
+            <div class="mb-2">🍽️ Restaurant
+              <div class="drop-zone" data-place="restaurant"></div>
+            </div>
+            <div class="mb-2">🚓 Police station
+              <div class="drop-zone" data-place="police"></div>
+            </div>
+            <div class="mb-2">🌾 Farm
+              <div class="drop-zone" data-place="farm"></div>
+            </div>
+            <div class="mt-3 d-flex gap-2 align-items-center">
+              <button id="btnCheckDrag" class="btn btn-success">Check</button>
+              <span id="dragScore" class="pill">Score: <b>0</b>/5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRONOUNS & ACTIONS QUIZ -->
+    <section id="pronouns" class="section">
+      <h3 class="section-header text-warning">👤 Pronouns · Choose the correct one</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Lee la oración y elige <b>He, She</b> o <b>They</b>.</div>
+      <div class="game-box">
+        <p id="qText" class="fs-5">—</p>
+        <div id="choices"></div>
+        <div class="mt-2" id="qFeedback"></div>
+        <div class="mt-2 d-flex gap-2 align-items-center">
+          <button id="nextQ" class="btn btn-primary">Next</button>
+          <span class="pill">Points: <b id="qPoints">0</b></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUMBERS 1–20 -->
+    <section id="numbers" class="section">
+      <h3 class="section-header text-info">🔢 Numbers 1–20 · Click the number I say</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Escucha el número y haz clic en él. Tienes 30 segundos.</div>
+      <div class="game-box">
+        <div class="d-flex justify-content-between align-items-center mb-2" id="hud">
+          <div class="pill">Find: <b id="targetNum">—</b></div>
+          <div class="pill">Correct: <b id="okCount">0</b>/10</div>
+          <div class="pill">Time: <b id="timeLeft">30</b>s</div>
+          <button class="btn btn-outline-dark btn-sm" id="restartNums">Restart</button>
+        </div>
+        <div class="grid20" id="numGrid"></div>
+        <audio id="sayAudio"></audio>
+      </div>
+    </section>
+
+    <!-- MOUSE COLLECT GAME -->
+    <section id="mousegame" class="section">
+      <h3 class="section-header text-secondary">🖱️ Collect the Stars (move your mouse)</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Mueve el mouse dentro de la caja y toca las ⭐ con el círculo rosa.</div>
+      <div class="game-box">
+        <div class="d-flex justify-content-between align-items-center mb-2" id="hud2">
+          <span class="pill">Stars: <b id="stars">0</b></span>
+          <span class="pill">Time: <b id="timer">30</b>s</span>
+          <button class="btn btn-outline-primary btn-sm" id="startMouse">Start</button>
+        </div>
+        <div id="arena" class="mb-2">
+          <div id="player"></div>
+        </div>
+        <small class="text-muted">Tip: Move the mouse inside the box to collect stars ⭐</small>
+      </div>
+    </section>
+
+    <!-- DRESS UP (clothes) -->
+    <section id="dressup" class="section">
+      <h3 class="section-header" style="color:#e83e8c">👗 Dress up the character (drag clothes)</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Arrastra cada prenda a su zona. Se formará una oración en inglés.</div>
+      <div class="row g-3">
+        <div class="col-md-7">
+          <div id="dress-area" class="game-box position-relative">
+            <div id="avatar"></div>
+            <div id="drop-hat"></div>
+            <div id="drop-shirt"></div>
+            <div id="drop-shoes"></div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="game-box d-grid gap-2">
+            <div class="cloth hat" draggable="true" data-slot="hat">🎩 Hat</div>
+            <div class="cloth shirt" draggable="true" data-slot="shirt">👕 Shirt</div>
+            <div class="cloth shoes" draggable="true" data-slot="shoes">👟 Shoes</div>
+            <div class="mt-2"><span class="pill">Outfit: <b id="outfitScore">0</b>/3</span></div>
+            <div class="mt-1" id="dressMsg"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT PAIRS -->
+    <section id="connect" class="section position-relative">
+      <svg id="lineLayer"></svg>
+      <h3 class="section-header text-dark">🔗 Connect pairs: job → place</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Haz clic en un trabajo (izquierda) y luego en su lugar (derecha).</div>
+      <div class="pair-board">
+        <div>
+          <div class="pair-item" data-side="L" data-key="teacher">Teacher 👩‍🏫</div>
+          <div class="pair-item" data-side="L" data-key="farmer">Farmer 👨‍🌾</div>
+          <div class="pair-item" data-side="L" data-key="nurse">Nurse 👩‍⚕️</div>
+          <div class="pair-item" data-side="L" data-key="cook">Cook 👩‍🍳</div>
+          <div class="pair-item" data-side="L" data-key="police">Police officer 👮‍♂️</div>
+        </div>
+        <div>
+          <div class="pair-item" data-side="R" data-key="restaurant">🍽️ Restaurant</div>
+          <div class="pair-item" data-side="R" data-key="police">🚓 Police station</div>
+          <div class="pair-item" data-side="R" data-key="school">🏫 School</div>
+          <div class="pair-item" data-side="R" data-key="hospital">🏥 Hospital</div>
+          <div class="pair-item" data-side="R" data-key="farm">🌾 Farm</div>
+        </div>
+      </div>
+      <div class="mt-3 d-flex gap-2 align-items-center">
+        <button class="btn btn-dark" id="resetConnect">Reset</button>
+        <span class="pill">Pairs: <b id="pairScore">0</b>/5</span>
+      </div>
+    </section>
+
+    <!-- NEW: MEMORY GAME -->
+    <section id="memory" class="section">
+      <h3 class="section-header text-primary">🧠 Memory: match emoji ↔ word</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Da vuelta dos tarjetas. Si coinciden, se quedan abiertas. Encuentra todos los pares.</div>
+      <div class="game-box">
+        <div id="memGrid" class="memory-grid"></div>
+        <div class="mt-2"><span class="pill">Pairs: <b id="memPairs">0</b>/8</span> <button class="btn btn-outline-primary btn-sm" onclick="initMemory()">Restart</button></div>
+      </div>
+    </section>
+
+    <!-- NEW: SENTENCE BUILDER -->
+    <section id="sentence" class="section">
+      <h3 class="section-header text-success">✍️ Sentence Builder</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Instrucciones: Arrastra las palabras al recuadro para formar la oración correcta.</div>
+      <div class="game-box">
+        <div class="mb-2">Target: <b id="sentTarget">She is cooking at the restaurant.</b></div>
+        <div id="wordBank" class="mb-2"></div>
+        <div id="dropSentence" class="sentence-drop mb-2"></div>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-primary" onclick="checkSentence()">Check</button>
+          <span class="pill">Score: <b id="sentScore">0</b></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: DICTIONARY (API) -->
+    <section id="dictionary" class="section">
+      <h3 class="section-header text-dark">🔎 Dictionary (Free API)</h3>
+      <div class="alert alert-info py-2"><i class="bi bi-lightbulb"></i> Escribe una palabra en inglés y presiona <b>Search</b>. Fuente: dictionaryapi.dev</div>
+      <div class="game-box">
+        <div class="input-group mb-2">
+          <input id="dictWord" type="text" class="form-control" placeholder="e.g., teacher" value="teacher">
+          <button class="btn btn-outline-secondary" onclick="lookupWord()">Search</button>
+          <button class="btn btn-outline-primary" onclick="speak(document.getElementById('dictWord').value)">🔊 Pronounce</button>
+        </div>
+        <div id="defBox" class="def-box"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BACKGROUND MUSIC (drop your mp3 next to this HTML) -->
+  <audio id="bgm" loop autoplay>
+    <source src="pou-theme.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    // ========= UTIL =========
+    const byId = (id)=>document.getElementById(id);
+    const fire = ()=> confetti({particleCount:120, spread:70, origin:{y:.6}});
+    function show(id){
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      byId(id).classList.add('active');
+      window.scrollTo({top:document.querySelector('#'+id).offsetTop - 60, behavior:'smooth'});
+    }
+
+    // ========= MUSIC =========
+    const bgm = byId('bgm');
+    const btnMusic = byId('btnMusic');
+    btnMusic.addEventListener('click',()=>{
+      if(bgm.paused){ bgm.play(); btnMusic.textContent='⏸ Música'; }
+      else{ bgm.pause(); btnMusic.textContent='▶ Música'; }
+    });
+
+    // ========= TTS =========
+    function speak(txt){ if('speechSynthesis' in window){ const u=new SpeechSynthesisUtterance(txt); u.lang='en-US'; window.speechSynthesis.speak(u); } }
+    function playAllVocab(){ const words=['teacher','farmer','nurse','cook','police officer','pilot','school','hospital','restaurant']; let i=0; function next(){ if(i>=words.length) return; speak(words[i++]); setTimeout(next,900);} next(); }
+
+    // ========= DRAG & DROP (jobs → places) =========
+    let dragScore=0;
+    document.querySelectorAll('.drag-item').forEach(el=>{
+      el.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain', el.dataset.answer+':'+el.textContent.trim()); });
+    });
+    document.querySelectorAll('.drop-zone').forEach(zone=>{
+      zone.addEventListener('dragover',e=>e.preventDefault());
+      zone.addEventListener('drop',e=>{
+        e.preventDefault();
+        const data=e.dataTransfer.getData('text/plain');
+        const [ans,label]=data.split(':');
+        if(zone.querySelector('.pill')) return; // one per zone
+        const tag=document.createElement('span'); tag.className='pill me-1'; tag.textContent=label; tag.dataset.ans=ans; zone.appendChild(tag); zone.classList.remove('correct','wrong');
+      });
+    });
+    byId('btnCheckDrag').addEventListener('click',()=>{
+      dragScore=0;
+      document.querySelectorAll('.drop-zone').forEach(zone=>{
+        const chip=zone.querySelector('.pill');
+        if(!chip){ zone.classList.add('wrong'); return; }
+        if(chip.dataset.ans===zone.dataset.place){ zone.classList.remove('wrong'); zone.classList.add('correct'); dragScore++; }
+        else{ zone.classList.remove('correct'); zone.classList.add('wrong'); }
+      });
+      byId('dragScore').innerHTML = `Score: <b>${dragScore}</b>/5`;
+      if(dragScore===5) fire();
+    });
+
+    // ========= PRONOUN QUIZ =========
+    const bank=[
+      {sent:"___ is cooking at the restaurant.", opts:['He','She','They'], ok:1},
+      {sent:"___ are playing at school.", opts:['He','She','They'], ok:2},
+      {sent:"___ is a nurse at the hospital.", opts:['He','She','They'], ok:1},
+      {sent:"___ is a farmer on the farm.", opts:['He','She','They'], ok:0},
+      {sent:"___ are not at the police station.", opts:['He','She','They'], ok:2},
+    ];
+    let qi=0, qPoints=0;
+    function loadQ(){ const q=bank[qi%bank.length]; byId('qText').innerHTML=q.sent; const wrap=byId('choices'); wrap.innerHTML=''; q.opts.forEach((t,i)=>{ const c=document.createElement('span'); c.className='chip'; c.textContent=t; c.onclick=()=> sel(i); wrap.appendChild(c); }); byId('qFeedback').textContent=''; }
+    function sel(i){ const q=bank[qi%bank.length]; const chips=[...document.querySelectorAll('#choices .chip')]; chips.forEach(ch=>ch.classList.remove('selected')); chips[i].classList.add('selected'); if(i===q.ok){ byId('qFeedback').innerHTML='✅ Correct!'; qPoints+=10; fire(); } else { byId('qFeedback').innerHTML='❌ Try again.'; qPoints=Math.max(0,qPoints-2);} byId('qPoints').textContent=qPoints; }
+    byId('nextQ').onclick=()=>{ qi++; loadQ(); };
+    loadQ();
+
+    // ========= NUMBERS GAME =========
+    const numbers=[...Array(20)].map((_,i)=>i+1);
+    let target, okCount=0, timeLeft=30, timerInt=null, asked=[];
+    const grid=byId('numGrid');
+    function renderGrid(){ grid.innerHTML=''; numbers.forEach(n=>{ const d=document.createElement('div'); d.className='num-card'; d.textContent=n; d.onclick=()=>pick(n,d); grid.appendChild(d); }) }
+    function say(txt){ if('speechSynthesis' in window){ const u=new SpeechSynthesisUtterance('Find ' + txt); u.lang='en-US'; window.speechSynthesis.speak(u);} }
+    function newTarget(){ const pool=numbers.filter(n=>!asked.includes(n)); if(pool.length===0){ endNums(); return; } target=pool[Math.floor(Math.random()*pool.length)]; asked.push(target); byId('targetNum').textContent=target; say(target); }
+    function tick(){ timeLeft--; byId('timeLeft').textContent=timeLeft; if(timeLeft<=0) endNums(); }
+    function startNums(){ okCount=0; asked=[]; timeLeft=30; byId('okCount').textContent=okCount; byId('timeLeft').textContent=timeLeft; renderGrid(); newTarget(); clearInterval(timerInt); timerInt=setInterval(tick,1000); }
+    function endNums(){ clearInterval(timerInt); const msg = okCount>=8? 'Great job! 🎉':'Nice try! 👍'; alert(`Score: ${okCount}/10\n${msg}`); if(okCount>=8) fire(); }
+    function pick(n,el){ if(n===target){ okCount++; el.classList.add('good'); byId('okCount').textContent=okCount; if(okCount>=10){ endNums(); } else newTarget(); } else { el.classList.add('bad'); } }
+    byId('restartNums').onclick=startNums; renderGrid();
+
+    // ========= MOUSE COLLECT GAME =========
+    const arena=byId('arena'); const player=byId('player');
+    let stars=0, time2=30, loop=null, t2=null, running=false;
+    function spawnStar(){ const s=document.createElement('div'); s.className='star'; s.style.left=Math.random()*(arena.clientWidth-20)+'px'; s.style.top=Math.random()*(arena.clientHeight-20)+'px'; arena.appendChild(s); setTimeout(()=> s.remove(), 4000); }
+    function startMouse(){ if(running) return; running=true; stars=0; time2=30; byId('stars').textContent=0; byId('timer').textContent=time2; [...arena.querySelectorAll('.star')].forEach(e=>e.remove()); loop=setInterval(spawnStar,500); t2=setInterval(()=>{ time2--; byId('timer').textContent=time2; if(time2<=0) stopMouse(); },1000); fire(); }
+    function stopMouse(){ running=false; clearInterval(loop); clearInterval(t2); alert(`You collected ${stars} ⭐`); if(stars>=25) fire(); }
+    byId('startMouse').onclick=startMouse;
+    arena.addEventListener('mousemove',e=>{ const rect=arena.getBoundingClientRect(); const x=e.clientX-rect.left-17; const y=e.clientY-rect.top-17; player.style.transform=`translate(${x}px,${y}px)`; arena.querySelectorAll('.star').forEach(st=>{ const sx=parseFloat(st.style.left), sy=parseFloat(st.style.top); if(Math.hypot(sx - x, sy - y) < 24){ stars++; byId('stars').textContent=stars; st.remove(); }}) });
+
+    // ========= DRESS UP =========
+    document.querySelectorAll('.cloth').forEach(c=>{ c.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain', c.dataset.slot+':'+c.textContent.trim()); }); });
+    [['drop-hat','hat'],['drop-shirt','shirt'],['drop-shoes','shoes']].forEach(([id,slot])=>{ const z=byId(id); z.addEventListener('dragover',e=>e.preventDefault()); z.addEventListener('drop',e=>{ e.preventDefault(); const data=e.dataTransfer.getData('text/plain'); const [key,label]=data.split(':'); if(key!==slot) return; if(z.querySelector('.pill')) return; const tag=document.createElement('span'); tag.className='pill'; tag.textContent=label; z.appendChild(tag); z.classList.add('slot-ok'); const count=document.querySelectorAll('.slot-ok').length; byId('outfitScore').textContent=count; byId('dressMsg').textContent = sentenceFor(slot); if(count===3){ fire(); byId('dressMsg').textContent += ' Awesome outfit!'; } }) });
+    function sentenceFor(slot){ if(slot==='hat') return 'He is wearing a hat.'; if(slot==='shirt') return 'She is wearing a shirt.'; return 'They are wearing shoes.'; }
+
+    // ========= CONNECT (SVG lines) =========
+    const lineLayer = byId('lineLayer');
+    let selLeft=null, pairs=0; const map={teacher:'school', farmer:'farm', nurse:'hospital', cook:'restaurant', police:'police'};
+    function xy(el){ const r=el.getBoundingClientRect(); return {x:r.left + r.width/2 + window.scrollX, y:r.top + r.height/2 + window.scrollY}; }
+    function drawLine(a,b){ const p1=xy(a), p2=xy(b); const path=document.createElementNS('http://www.w3.org/2000/svg','line'); path.setAttribute('x1',p1.x); path.setAttribute('y1',p1.y); path.setAttribute('x2',p2.x); path.setAttribute('y2',p2.y); path.setAttribute('stroke','#8e44ad'); path.setAttribute('stroke-width','4'); path.setAttribute('stroke-linecap','round'); lineLayer.appendChild(path); }
+    function clearLines(){ lineLayer.innerHTML=''; }
+    document.querySelectorAll('#connect .pair-item').forEach(it=>{
+      it.addEventListener('click',()=>{
+        const side=it.dataset.side;
+        if(side==='L'){ selLeft=it; document.querySelectorAll('#connect .pair-item').forEach(n=>n.classList.remove('selected')); it.classList.add('selected'); }
+        else if(selLeft){ const keyL=selLeft.dataset.key; const keyR=it.dataset.key; drawLine(selLeft,it); if(map[keyL]===keyR){ pairs++; byId('pairScore').textContent=pairs; fire(); selLeft.classList.add('disabled'); it.classList.add('disabled'); selLeft=null; if(pairs===5) alert('Great matching!'); } else { setTimeout(()=>{ clearLines(); pairs=0; byId('pairScore').textContent=pairs; }, 400); } }
+      })
+    });
+    byId('resetConnect').onclick=()=>{ pairs=0; byId('pairScore').textContent=pairs; clearLines(); document.querySelectorAll('#connect .pair-item').forEach(n=>n.classList.remove('disabled','selected')); };
+
+    // ========= MEMORY GAME =========
+    const memPairs=[ ['👩‍🏫','teacher'], ['👨‍🌾','farmer'], ['👩‍⚕️','nurse'], ['👩‍🍳','cook'], ['🚓','police'], ['✈️','pilot'], ['🏫','school'], ['🏥','hospital'] ];
+    let memFirst=null, memLock=false, memScore=0;
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+    function initMemory(){ memScore=0; byId('memPairs').textContent=0; const deck=[]; memPairs.forEach(([emoji,word])=>{ deck.push({type:'emoji',val:emoji,key:word}); deck.push({type:'word',val:word,key:word}); }); shuffle(deck); const grid=byId('memGrid'); grid.innerHTML=''; deck.forEach((card,i)=>{ const c=document.createElement('div'); c.className='card-mem'; c.dataset.key=card.key; c.innerHTML=`<div class="face front"></div><div class="face back">${card.type==='emoji'?card.val:card.val}</div>`; c.onclick=()=> flipMem(c); grid.appendChild(c); }); }
+    function flipMem(c){ if(memLock || c.classList.contains('flipped')) return; c.classList.add('flipped'); if(!memFirst){ memFirst=c; return; } memLock=true; const match = memFirst.dataset.key===c.dataset.key; setTimeout(()=>{ if(match){ memScore++; byId('memPairs').textContent=memScore; memFirst.style.visibility='hidden'; c.style.visibility='hidden'; if(memScore===8){ fire(); alert('You matched all pairs!'); } } else { memFirst.classList.remove('flipped'); c.classList.remove('flipped'); } memFirst=null; memLock=false; }, 600); }
+    initMemory();
+
+    // ========= SENTENCE BUILDER =========
+    const sentenceTarget = "She is cooking at the restaurant.";
+    const words = ["She","is","cooking","at","the","restaurant","they","farm","he"]; // some distractors
+    const chosen = ["She","is","cooking","at","the","restaurant"]; 
+    function renderSentence(){ byId('sentTarget').textContent = sentenceTarget; const bank=byId('wordBank'); bank.innerHTML=''; words.forEach(w=>{ const span=document.createElement('span'); span.className='word'; span.textContent=w; span.draggable=true; span.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain', w); }); bank.appendChild(span); }); const drop=byId('dropSentence'); drop.innerHTML=''; drop.addEventListener('dragover',e=>e.preventDefault()); drop.addEventListener('drop',e=>{ e.preventDefault(); const w=e.dataTransfer.getData('text/plain'); const chip=document.createElement('span'); chip.className='pill me-1'; chip.textContent=w; drop.appendChild(chip); }); }
+    renderSentence();
+    function checkSentence(){ const chips=[...byId('dropSentence').querySelectorAll('.pill')].map(x=>x.textContent); const ok = chips.join(' ')===chosen.join(' '); if(ok){ let s=Number(byId('sentScore').textContent); byId('sentScore').textContent= s+10; fire(); alert('✅ Great sentence!'); } else { alert('❌ Try again. Tip: Start with "She".'); } }
+
+    // ========= DICTIONARY (API) =========
+    async function lookupWord(){ const w=byId('dictWord').value.trim(); if(!w) return; byId('defBox').innerHTML='<em>Loading...</em>'; try{ const res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(w)}`); if(!res.ok) throw new Error('No results'); const data=await res.json(); const defs = data[0]?.meanings?.flatMap(m=>m.definitions)?.slice(0,3) || []; byId('defBox').innerHTML = defs.length? defs.map((d,i)=>`<div><b>Definition ${i+1}:</b> ${d.definition}</div>`).join('') : 'No definitions found.'; } catch(e){ byId('defBox').innerHTML = '<span class="text-danger">No results. Try another word.</span>'; } }
+
+    // Default open first section
+    show('vocab');
+  </script>
+</body>
+</html>

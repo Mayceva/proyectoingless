@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego: ¿Comida Saludable o No?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #eaffea 0%, #b2dfdb 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px #388e3c33;
+            padding: 32px 28px 28px 28px;
+            text-align: center;
+        }
+        h1 {
+            color: #388e3c;
+            margin-bottom: 18px;
+        }
+        .alimentos-juego {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0 40px 0;
+        }
+        .alimentos-juego img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            background: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: grab;
+        }
+        .alimentos-juego img.usado {
+            opacity: 0.5;
+            filter: grayscale(0.7);
+            cursor: not-allowed;
+        }
+        .canastos-area {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .canasto {
+            width: 220px;
+            height: 180px;
+            border-radius: 0 0 60px 60px/0 0 100px 100px;
+            background: linear-gradient(180deg, #eaffea 60%, #388e3c 100%);
+            border: 4px solid #388e3c;
+            box-shadow: 0 8px 24px rgba(56,142,60,0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+        .canasto img {
+            width: 90px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 2px 6px #388e3c55);
+        }
+        .canasto-label {
+            font-weight: bold;
+            color: #fff;
+            background: #388e3c;
+            padding: 8px 18px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px #388e3c33;
+        }
+        .canasto-saludable {
+            background: linear-gradient(180deg, #eaffea 60%, #388e3c 100%);
+            border-color: #388e3c;
+        }
+        .canasto-no {
+            background: linear-gradient(180deg, #ffe0b2 60%, #e57373 100%);
+            border-color: #e57373;
+        }
+        #mensaje {
+            font-size: 1.2em;
+            color: #388e3c;
+            font-weight: bold;
+            text-align: center;
+            min-height: 2em;
+            margin-bottom: 30px;
+            transition: color 0.3s;
+        }
+        .canasto.soltando {
+            box-shadow: 0 0 0 6px #388e3c55;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¿Comida Saludable o No?</h1>
+        <p>Arrastra cada alimento al canasto correcto: <b>Saludable</b> o <b>No saludable</b>.</p>
+        <div class="alimentos-juego">
+            <!-- Comida Saludable -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Culinary_fruits_front_view.jpg" alt="Manzana" draggable="true" id="manzana" data-tipo="saludable">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Carrot.jpg" alt="Zanahoria" draggable="true" id="zanahoria" data-tipo="saludable">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Lettuce_Mini_Romaine.jpg" alt="Lechuga" draggable="true" id="lechuga" data-tipo="saludable">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Orange-Fruit-Pieces.jpg" alt="Naranja" draggable="true" id="naranja" data-tipo="saludable">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Grilled_salmon_on_a_plate.jpg" alt="Salmón" draggable="true" id="salmon" data-tipo="saludable">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Almonds_in_shell_and_shells.jpg" alt="Almendras" draggable="true" id="almendras" data-tipo="saludable">
+            <!-- No saludable -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/French_Fries.JPG" alt="Papas Fritas" draggable="true" id="papas" data-tipo="no">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Hamburger_%28black_bg%29.jpg" alt="Hamburguesa" draggable="true" id="hamburguesa" data-tipo="no">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Pizza_on_stone.jpg" alt="Pizza" draggable="true" id="pizza" data-tipo="no">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Soda_can.png" alt="Bebida Azucarada" draggable="true" id="soda" data-tipo="no">
+        </div>
+
+        <div class="canastos-area">
+            <!-- Canasto de Saludable -->
+            <div id="canasto-saludable"
+                class="canasto canasto-saludable"
+                ondragover="event.preventDefault(); this.classList.add('soltando');"
+                ondragleave="this.classList.remove('soltando');"
+                ondrop="soltarEnCanasto(event, 'saludable'); this.classList.remove('soltando');">
+                <img src="https://cdn.pixabay.com/photo/2014/12/21/23/50/basket-579547_1280.png" alt="Canasto Saludable">
+                <div class="canasto-label">Saludable</div>
+            </div>
+            <!-- Canasto de No saludable -->
+            <div id="canasto-no"
+                class="canasto canasto-no"
+                ondragover="event.preventDefault(); this.classList.add('soltando');"
+                ondragleave="this.classList.remove('soltando');"
+                ondrop="soltarEnCanasto(event, 'no'); this.classList.remove('soltando');">
+                <img src="https://cdn.pixabay.com/photo/2014/12/21/23/50/basket-579547_1280.png" alt="Canasto No Saludable">
+                <div class="canasto-label">No saludable</div>
+            </div>
+        </div>
+
+        <div id="mensaje"></div>
+    </div>
+    <script>
+    const nombres = {
+        "manzana": "Manzana",
+        "zanahoria": "Zanahoria",
+        "lechuga": "Lechuga",
+        "naranja": "Naranja",
+        "salmon": "Salmón",
+        "almendras": "Almendras",
+        "papas": "Papas Fritas",
+        "hamburguesa": "Hamburguesa",
+        "pizza": "Pizza",
+        "soda": "Bebida Azucarada"
+    };
+
+    let saludableCorrectas = 0;
+    let noCorrectas = 0;
+    const totalSaludable = 6;
+    const totalNo = 4;
+
+    document.querySelectorAll('.alimentos-juego img[draggable="true"]').forEach(img => {
+        img.addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData("text/plain", e.target.id);
+        });
+    });
+
+    function soltarEnCanasto(event, tipoCanasto) {
+        event.preventDefault();
+        const alimentoId = event.dataTransfer.getData("text/plain");
+        const elemento = document.getElementById(alimentoId);
+        const tipo = elemento.getAttribute('data-tipo');
+        const nombre = nombres[alimentoId];
+
+        if (tipo === tipoCanasto) {
+            if (!elemento.classList.contains('usado')) {
+                elemento.classList.add('usado');
+                if (tipoCanasto === 'saludable') saludableCorrectas++;
+                if (tipoCanasto === 'no') noCorrectas++;
+                document.getElementById("mensaje").textContent = `¡Correcto! ${nombre} es ${tipoCanasto === 'saludable' ? 'saludable' : 'no saludable'}.`;
+                document.getElementById("mensaje").style.color = "#388e3c";
+            }
+        } else {
+            document.getElementById("mensaje").textContent = `¡Ups! ${nombre} no es ${tipoCanasto === 'saludable' ? 'saludable' : 'no saludable'}.`;
+            document.getElementById("mensaje").style.color = "#e57373";
+            setTimeout(() => {
+                document.getElementById("mensaje").style.color = "#388e3c";
+            }, 1200);
+        }
+
+        // Mensaje final si termina el juego
+        if (saludableCorrectas === totalSaludable && noCorrectas === totalNo) {
+            document.getElementById("mensaje").textContent = "¡Felicidades! Has clasificado correctamente todos los alimentos.";
+            document.getElementById("mensaje").style.color = "#8f00ff";
+        }
+    }
+    </script>

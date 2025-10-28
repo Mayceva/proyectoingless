@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VEN APRENDE CON KRONOS/COME LEARN WITH KRONOS</title>
+  <script src="./js/load-menu.js"></script>
+
+  <style>
+  
+   .top-bar {
+  background-color: #fefefe;
+  padding: 10px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1000;
+  gap: 10px;
+}
+
+
+  body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #5c0010; /* rojo vino */
+  display: flex;
+  flex-direction: column; /* 📌 ahora se apilan verticalmente */
+  align-items: center;
+  min-height: 100vh;
+}
+
+
+  .contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .tarjeta {
+    background-color: green; /* fondo verde */
+    border: 4px solid #5c0010; /* borde rojo vino */
+    border-radius: 10px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+
+  .tarjeta:hover {
+    transform: scale(1.02);
+  }
+
+  .tarjeta h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: black;
+    font-weight: bold;
+  }
+
+  .tarjeta button {
+    background-color: #055B28;
+    border: 3px solid #5c0010;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .tarjeta button:hover {
+    background-color: #45a049;
+  }
+  .seccion-juegos iframe {
+  width: 100%;
+  height: 500px; /* mismo alto para todos */
+  border: 4px solid green;
+  border-radius: 10px;
+}
+
+
+  .seccion-juegos {
+    display: none;
+    background-color: #5c0010; /* rojo vino */
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .seccion-juegos h3, .seccion-juegos h4 {
+    color: black;
+    font-weight: bold;
+  }
+
+  .seccion-juegos iframe {
+    width: 100%;
+    height: 500px;
+    border: 4px solid green; /* borde verde */
+    border-radius: 10px;
+  }
+  .glosario {
+  background-color: white;
+  border: 6px solid black;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.glosario h4 {
+  margin-top: 0;
+  color: green;
+  
+}
+
+.glosario ul {
+  margin: 0;
+  padding-left: 20px;
+  border: 4px solid black ;
+}
+
+.glosario li {
+  margin-bottom: 5px;
+}
+.seccion-juegos h3 {
+  background-color: green; /* Verde institucional */
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.seccion-juegos h4 {
+  background-color: #5c0010; /* Rojo vino */
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: inline-block;
+}
+/* Ajuste general para que todo se adapte */
+body {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Para pantallas de hasta 768px (tablets y celulares grandes) */
+@media (max-width: 768px) {
+  .contenedor {
+    flex-direction: column;
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .tarjeta {
+    padding: 20px 15px;
+  }
+
+  .tarjeta h2 {
+    font-size: 1.2em;
+  }
+
+  .tarjeta button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+
+  .seccion-juegos iframe {
+    height: 500px; /* más bajo para móviles */
+  }
+
+  .glosario {
+    font-size: 0.9em;
+  }
+}
+
+/* Para celulares pequeños (menos de 480px) */
+@media (max-width: 480px) {
+  #logo-con-frase {
+    width: 60px; /* logo más pequeño */
+  }
+
+  #frase-logo {
+    font-size: 0.75em;
+  }
+
+  .tarjeta h2 {
+    font-size: 1em;
+  }
+
+  .tarjeta {
+    padding: 15px 10px;
+  }
+
+  .seccion-juegos iframe {
+    height: 250px; /* más compacto */
+  }
+
+  .glosario {
+    padding: 10px;
+  }
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+/* En pantallas pequeñas */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.4em;
+  }
+}
+}
+
+
+
+
+</style>
+</head>
+ <div class="button-container">
+       <button class="button" onclick="window.location.href='/index.html'">
+      <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 1024 1024" stroke-width="0" fill="currentColor" stroke="currentColor" class="icon">
+        <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path>
+      </svg>
+    </button>
+
+  <body>
+  <!-- Título principal -->
+  <h1 style="text-align: center; color: white; margin: 20px 0;">
+   VEN APRENDE CON KRONOS /  COME LEARN WITH KRONOS
+  </h1>
+
+  <!-- Logo + frase debajo -->
+  <div id="logo-con-frase" style="margin: 10px auto; display: flex; flex-direction: column; align-items: center; width: 80px;">
+    <img src="https://i.postimg.cc/HLzNGgM9/images-removebg-preview.png" 
+         alt="Logo" style="width: 100%; height: auto;">
+    <span id="frase-logo" style="font-size: 0.9em; font-weight: bold; color: white; text-align: center; margin-top: 5px; display: none;">
+      ¡Una escuela para crear, convivir y pensar!
+    </span>
+  </div>
+
+
+  <!-- Aquí siguen las tarjetas -->
+  <div class="contenedor">
+   
+
+    <div class="tarjeta">
+      <h2>Miembros de la Familia / Family Members</h2>
+      <button onclick="mostrarSeccionJuegos()">Inicio / Start</button>
+    </div>
+
+ 
+    
+  
+
+</div>
+      
+  
+
+  
+
+  <div class="seccion-juegos" id="seccion-juegos">
+    
+    <h3>Miembros de la Familia / Family Members</h3>
+    <!-- 📚 Glosario -->
+  <div class="glosario">
+    <h4>Glosario</h4>
+    <ul>
+      <li>Father – Padre</li>
+      <li>Mother – Madre</li>
+      <li>Brother – Hermano</li>
+      <li>Sister – Hermana</li>
+      <li>Grandfather – Abuelo</li>
+      <li>Grandmother – Abuela</li>
+      <li>Uncle – Tío</li>
+      <li>Aunt – Tía</li>
+      <li>Cousin – Primo o Prima</li>
+      <li>Son - Hijo</li>
+<li>Daughter - Hija</li>
+      
+    </ul>
+  </div>
+    <div id="juego1"></div>
+    <div id="juego2"></div> 
+    <div id="juego3"></div>
+    <div id="juego4"> style="margin-top: 40px;"></div>
+    
+    
+   
+  <!-- Botón atrás -->
+<button onclick="volverOpciones()" 
+        style="margin:20px auto; display:block; padding:10px 20px; font-size:16px; cursor:pointer;">
+  ⬅ 🤧 Atrás / Back
+</button>
+<!-- Juego interactivo de Deportes -->
+<div id="juego-deportes" style="margin-top: 30px; text-align: center;">
+  <h4>PON APRUEBA TUS CONOCIMINETOS /  TEST YOUR KNOWLEDGE</h4>
+  <p id="palabra-en-deportes" style="font-size: 1.2em; font-weight: bold;">Palabra</p>
+  <input type="text" id="respuesta-deportes" placeholder="Escribe en español" style="padding:5px; font-size:1em;">
+  <button onclick="verificarRespuestaDeportes()">Responder</button>
+  <p id="feedback-deportes" style="font-weight: bold;"></p>
+  <p>Puntaje: <span id="puntaje-deportes">0</span></p>
+</div>
+
+  </div>
+
+  <script>
+    
+    function mostrarSeccionJuegos() {
+  document.getElementById('seccion-juegos').style.display = 'block';
+  document.querySelector('.contenedor').style.display = 'none';
+  
+  // Mostrar la frase
+  document.getElementById('frase-logo').style.display = 'inline';
+
+  // Insertar los iframes dinámicamente
+  document.getElementById('juego1').innerHTML =
+    `<h4>Juego 1: A PRACTICAR COMO SE DICE 👾/👾 TO PRACTICE HOW IT IS SAID</h4>
+     <iframe src="https://wordwall.net/es/embed/3aefe26a74664bae850e1a12ff5bca2c?themeId=59&templateId=70&fontStackId=0"
+             allow="fullscreen; autoplay;" allowfullscreen></iframe>`;
+
+  document.getElementById('juego2').innerHTML =
+    `<h4>Juego 2: MIEMBROS DE LA FAMILIA 😎/😎 FAMILY MEMBERS</h4>
+     <iframe src="https://wordwall.net/es/embed/692404df08084abdb3d2984f9d126518?themeId=51&templateId=2&fontStackId=0"
+             allow="fullscreen; autoplay;" allowfullscreen></iframe>`;
+             
+            document.getElementById('juego3').innerHTML =
+  `<h4>Juego 3: MEMORIA DE PALABRAS 👽/👽 WORD MEMORY</h4>
+   <iframe src="https://es.educaplay.com/juego/24913112-familia_en_ingles_memoria_de_palabras.html"
+           allow="fullscreen; autoplay;" allowfullscreen></iframe>`;
+
+document.getElementById('juego4').innerHTML =
+  `<h4>Juego 4: SOPA DE LETRAS ☠️/☠️ WORD SEARCH</h4>
+   <iframe src="https://es.educaplay.com/juego/24904220-sopa_de_palabras_miembros_de_la_familia.html"
+           allow="fullscreen; autoplay;" allowfullscreen></iframe>`;
+           
+    }
+ 
+
+function volverOpciones() {
+  document.getElementById('seccion-juegos').style.display = 'none';
+  document.querySelector('.contenedor').style.display = 'flex';
+
+  // Ocultar la frase
+  document.getElementById('frase-logo').style.display = 'none';
+}
+// Lista de palabras de deportes
+let palabrasDeportes = [
+  { en: "DAUGHTER", es: "HIJA" },
+  { en: "MOTHER", es: "MADRE" },
+  { en: "SON", es: "HIJO" },
+  { en: "HERMANO", es: "BROTHER" },
+  { en: "TIA", es: "AUNT" },
+  { en: "GRANDFATHER", es: "ABUELO" },
+  { en: "FATHER", es: "PADRE" },
+  { en: "ABUELA", es: "GRANDMOTHER" },
+  { en: "UNCLE", es: "TIO" },
+  { en: "COUSIN", es: "PRIMA O PRIMO" }
+];
+
+let puntajeDeportes = 0;
+let palabraActualDeportes = {};
+
+// Mostrar nueva palabra
+function nuevaPalabraDeportes() {
+  if (palabrasDeportes.length === 0) {
+    document.getElementById("palabra-en-deportes").textContent = "¡Juego terminado!";
+    document.getElementById("respuesta-deportes").style.display = "none";
+    return;
+  }
+  let indice = Math.floor(Math.random() * palabrasDeportes.length);
+  palabraActualDeportes = palabrasDeportes[indice];
+  document.getElementById("palabra-en-deportes").textContent = palabraActualDeportes.en;
+}
+
+function verificarRespuestaDeportes() {
+  let respuesta = document.getElementById("respuesta-deportes").value.trim().toLowerCase();
+  let correcta = palabraActualDeportes.es.toLowerCase();
+
+  // Si la palabra es "COUSIN", aceptar "primo" o "prima"
+  if (palabraActualDeportes.en.toLowerCase() === "cousin") {
+    if (respuesta === "primo" || respuesta === "prima") {
+      document.getElementById("feedback-deportes").textContent = "✅ ¡Correcto!";
+      puntajeDeportes++;
+    } else {
+      document.getElementById("feedback-deportes").textContent = "❌ Incorrecto. La respuesta correcta es: primo o prima";
+    }
+  } 
+  // Para el resto, comparación normal
+  else {
+    if (respuesta === correcta) {
+      document.getElementById("feedback-deportes").textContent = "✅ ¡Correcto!";
+      puntajeDeportes++;
+    } else {
+      document.getElementById("feedback-deportes").textContent = `❌ Incorrecto. La respuesta correcta es: ${palabraActualDeportes.es}`;
+    }
+  }
+
+  document.getElementById("puntaje-deportes").textContent = puntajeDeportes;
+
+  // Eliminar palabra ya usada
+  palabrasDeportes = palabrasDeportes.filter(p => p.en !== palabraActualDeportes.en);
+
+  document.getElementById("respuesta-deportes").value = "";
+  nuevaPalabraDeportes();
+}
+
+
+
+// Iniciar juego de deportes automáticamente al cargar sección
+nuevaPalabraDeportes();
+
+
+
+    
+    
+  </script>
+  
+
+</body>
+</html>

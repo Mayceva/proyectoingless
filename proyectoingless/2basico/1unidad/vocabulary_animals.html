@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Animales en Inglés</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .cloud {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: float 25s linear infinite;
+    }
+
+    .cloud1 { width: 120px; height: 60px; top: 50px; left: -200px; animation-delay: 0s; }
+    .cloud2 { width: 180px; height: 80px; top: 150px; left: -300px; animation-delay: 10s; }
+    .cloud3 { width: 140px; height: 70px; top: 220px; left: -250px; animation-delay: 5s; }
+
+    @keyframes float {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(120vw); }
+    }
+
+    h1 {
+      color: #ff4081;
+      font-size: 36px;
+      margin-top: 40px;
+      text-shadow: 1px 1px 3px #fff;
+    }
+
+    .vocab-card {
+      font-size: 32px;
+      margin: 30px 0;
+      color: #3e2723;
+      background: #fff8e1;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 20px;
+      border: 3px solid #ffca28;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    }
+
+    input[type="text"] {
+      font-size: 20px;
+      padding: 10px;
+      width: 200px;
+      text-align: center;
+      border-radius: 10px;
+      border: 2px solid #ffa000;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #4dd0e1;
+      color: #004d40;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background-color: #00acc1;
+    }
+
+    .message {
+      font-size: 28px;
+      margin-top: 30px;
+      color: #2e7d32;
+      display: none;
+      animation: appear 0.7s ease-in-out forwards;
+    }
+
+    @keyframes appear {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 16px;
+      color: #5d4037;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nubes -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+
+  <h1>🐾 Vocabulario de Animales</h1>
+  <p>Escribe el nombre del animal en <strong>inglés</strong>.</p>
+
+  <div class="vocab-card" id="animalDisplay">🐶 Perro</div>
+
+  <br>
+  <input type="text" id="userInput" placeholder="Write in English">
+  <br>
+  <button onclick="checkAnswer()">Enviar</button>
+
+  <div class="message" id="finalMessage">¡Excelente trabajo! 🎉🎉</div>
+
+  <footer>&copy; 2025 Aprende Jugando · Inglés Básico</footer>
+
+  <script>
+    const animals = [
+      { emoji: "🐶", es: "Perro", en: "dog" },
+      { emoji: "🐱", es: "Gato", en: "cat" },
+      { emoji: "🐭", es: "Ratón", en: "mouse" },
+      { emoji: "🐰", es: "Conejo", en: "rabbit" },
+      { emoji: "🦊", es: "Zorro", en: "fox" },
+      { emoji: "🐻", es: "Oso", en: "bear" },
+      { emoji: "🐮", es: "Vaca", en: "cow" },
+      { emoji: "🐷", es: "Cerdo", en: "pig" },
+      { emoji: "🦁", es: "León", en: "lion" },
+      { emoji: "🐸", es: "Rana", en: "frog" }
+    ];
+
+    let used = [];
+    let current = null;
+    let correctCount = 0;
+    const totalRounds = 10;
+
+    function getRandomAnimal() {
+      let options = animals.filter(a => !used.includes(a.en));
+      if (options.length === 0) return null;
+      let item = options[Math.floor(Math.random() * options.length)];
+      used.push(item.en);
+      current = item;
+      document.getElementById("animalDisplay").textContent = `${item.emoji} ${item.es}`;
+    }
+
+    function checkAnswer() {
+      const input = document.getElementById("userInput").value.trim().toLowerCase();
+      if (input === current.en) {
+        correctCount++;
+        if (correctCount >= totalRounds) {
+          document.getElementById("finalMessage").style.display = "block";
+        } else {
+          getRandomAnimal();
+        }
+      } else {
+        alert("¡Intenta de nuevo! 😊");
+      }
+      document.getElementById("userInput").value = "";
+    }
+
+    // Start the game
+    getRandomAnimal();
+  </script>
+
+</body>
+</html>

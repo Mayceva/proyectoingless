@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>COME LEARN WITH KRONOS / VEN APRENDE CON KRONOS</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Confetti JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    section {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+    section.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="hero-logo-container d-flex align-items-center p-3">
+    <img class="hero-logo" src="./public/kronos-logo.png" alt="Logo institucional Kronos" style="height: 100px; margin-right: 15px;">
+    <h1 class="hero-title flex-grow-1">Liceo Bicentenario Kronos ¡Una escuela para crear, convivir y pensar!</h1>
+    <a href="https://www.instagram.com/colegiokronos/?hl=es" target="_blank">
+      <img class="hero-logo" src="./public/logo-insta-removebg-preview.png" alt="Logo de Instagram" style="height: 70px; margin-left: 15px;">
+        <a href="https://www.facebook.com/liceobicentenariokronos" target="_blank">
+      <img clss="hero-logo" src="./public/facebook.png" alt="Logo de Facebook del colegio kronos" style="height: 60px; margin-left: 5px;">
+    </a>
+  </header>
+
+  <!-- MENÚ DINÁMICO -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#" onclick="mostrarSeccion('bio')">😎INICIO😎</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('intro')">👀INTRODUCCIÓN👀</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('cursos')">👫CURSOS👫</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('contacto')">🧒🏿CONTACTOS🧒🏿</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECCIONES -->
+  <main>
+    <!-- 1. BIO -->
+    <section id="bio" class="active">
+      <h2>📚Bienvenidos al Liceo Bicentenario Kronos🎓</h2>
+
+      <div class="historia-card">
+        <h3 class="historia-title">💖💋Nuestra Historia⚽🔥</h3>
+        <!-- Aqui colocamos el carrusel -->
+        <div id="demo" class="carousel slide" data-bs-ride="carousel" style="max-height: 400px; overflow: hidden;">
+          <!-- Indicators/dots -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://i.postimg.cc/pVYzMMFX/todos.jpg" class="d-block w-100" alt="Foto del curso">
+            </div>
+            <div class="carousel-item">
+              <img src="https://i.postimg.cc/wjyd1p0H/unnamed.png" class="d-block w-100" alt="Chicas programadoras">
+            </div>
+            <div class="carousel-item">
+              <img src="https://i.postimg.cc/SsBJXdpC/caporal.png" class="d-block w-100" alt="Programadores Caporales">
+            </div>
+          </div>
+
+          <!-- Controls/arrows -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <p class="historia-text" style="margin-top: 20px;">
+          Somos estudiantes de 4to programación , el cuál iniciamos un proyecto con el fin de poder educar mientras juegan nuestros compañeros más pequeños... 
+          Para nosotros en un placer hoy haber podido dejar un legado en el Liceo Bicentenario Kronos.Solo esperamos que nuestros compañeros puedan disfrutar de este reforzamiento de inglés.
+          Este proyecto fué hecho en diferentes etapas durante el trayecto y el transcurso de los días.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. INTRO -->
+    <section id="intro" class="intro-section">
+  <div class="container py-5">
+    <!-- Título con emojis -->
+    <h1 class="mb-4 text-center">
+      🌍 ¡Bienvenido a <span style="color:#000000;">Kronos</span>! 🌍
+    </h1>
+
+    <!-- Texto atractivo -->
+    <p class="lead text-center" style="font-size: 1.3rem;">
+      En <b>Liceo Bicentenario Kronos</b> creemos que aprender puede ser 
+      divertido 🎮📚.  
+      Aquí podrás explorar, jugar y descubrir nuevas formas de aprender inglés mientras disfrutas 🤩💡.
+      Tambien queremos enseñarles cuàl fuè el procedimiento de esta creaciòn:
+      Nos dividimos en 8 grupos , al cuàl a cada grupo le tocò un curso y una unidad para ustedes ...Compañeros màs pequeños .
+      En un tiempo limitado el profesor Marcos no hizo trabajar en la sala de innovaciòn (con los computadores), para poder hacer esta pàgina y que de esa manera ustedes aprendan.
+    </p>
+
+    <!-- Fila de imágenes con animación -->
+ 
+   <div class="row mt-5">
+
+  <div class="col-md-4 mb-3">
+    <img src="./public/imagendemanos.jpg" 
+         class="img-fluid rounded shadow-sm intro-img" 
+         alt="Estudiantes Kronos">
+  </div>
+
+   <div class="col-md-4 mb-3">
+    <video class="img-fluid rounded shadow-sm intro-img" controls autoplay muted loop>
+      <source src="./public/YouCut_20251021_151658740_1_--rU5grUp7iwdfQ.mp4" type="video/mp4">
+      
+    </video>
+  </div>
+  <div class="col-md-4 mb-3">
+    <img src="./public/opinando.jpg" 
+         class="img-fluid rounded shadow-sm intro-img" 
+         alt="Caporales Kronos">
+  </div>
+</div>
+    
+
+
+    <!-- Frase motivadora -->
+    <h2 class="text-center mt-5" style="color:#2196f3; font-weight:bold;">
+      🚀 Aprende, juega y crece con nosotros 🎶
+    </h2>
+  </div>
+</section>
+
+<!-- Estilos extra -->
+<style>
+  .intro-section {
+    background: linear-gradient(135deg, #fceabb, #ffffff);
+    color: #050202;
+    border-radius: 15px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  .intro-img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .intro-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  }
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+</style>
+
+<!-- 3. CURSOS -->
+<section id="cursos" class="cursos-section">
+  <div class="cursos-header">
+    <h1>🌟 Nuestros Cursos 🌟</h1>
+    <p>🎮 Aprende jugando y diviértete mientras descubres nuevos conocimientos 📚✨</p>
+  </div>
+
+  <!-- Contenedor de las tarjetas -->
+  <div id="contenedor-cursos" class="cursos-grid"></div>
+
+  <!-- Script para cargar las tarjetas -->
+  <script>
+    fetch('./partials/menu.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("contenedor-cursos").innerHTML = data;
+      });
+  </script>
+</section>
+
+     
+<!-- 4. CONTACTO -->
+<section id="contacto" class="contacto-section py-5">
+  <div class="container text-center">
+    <h2 class="mb-4" style="color:#1a237e; font-weight:bold;">
+      📬 ¡Contáctanos! 💬
+    </h2>
+    <p class="lead mb-5" style="color:#333;">
+      Si deseas comunicarte con nuestros docentes, aquí tienes sus contactos oficiales 🧑‍🏫✨
+    </p>
+
+    <div class="row justify-content-center">
+<!-- Profesor 1 -->
+<div class="col-md-4 mb-4">
+  <div class="card shadow-lg border-0 h-100 contact-card text-center p-3">
+    <img src="./public/profe marco.png" 
+         alt="Profesor Marco" 
+         class="rounded-circle mb-3 contact-img mx-auto d-block"
+         style="width:130px; height:130px; object-fit:cover; border:4px solid #ffc107;">
+
+    <h4 class="card-title mt-2 text-dark">
+      👨‍🏫 <b>Marco Ahumada</b>
+    </h4>
+
+    <p class="text-muted mb-1"><i class="fa-solid fa-book"></i> Área: <b>Inglés</b> GB y EM</p>
+    <p class="mb-2"><i class="fa-solid fa-envelope text-primary"></i> 
+      <b>mahumada@colegiokronos.cl</b>
+    </p>
+
+    <hr class="mx-auto" style="width:70%; border:1px solid #ffc107;">
+
+    <div class="course-list">
+      <p class="fw-bold text-dark mb-2">Cursos que enseña:</p>
+      <p class="mb-1">📘 5° A y B</p>
+      <p class="mb-1">📘 6° A y B</p>
+      <p class="mb-1">📗 7° A y B</p>
+      <p class="mb-1">💻 3° y 4° ADM</p>
+      <p class="mb-0">💻 3° y 4° PROG</p>
+    </div>
+  </div>
+</div>
+<!-- Profesor 2 -->
+<div class="col-md-4 mb-4">
+  <div class="card shadow-lg border-0 h-100 contact-card text-center p-3">
+    <img src="./public/profe alan.png"
+         alt="Profesor Alan" 
+         class="rounded-circle mb-3 contact-img mx-auto d-block"
+         style="width:130px; height:130px; object-fit:cover; border:4px solid #ffc107;">
+
+    <h4 class="card-title mt-2 text-dark">
+      👨‍🏫 <b>Alan Aedo</b>
+    </h4>
+
+    <p class="text-muted mb-1"><i class="fa-solid fa-book"></i> Área: <b>Inglés</b> GB y EPJA</p>
+    <p class="mb-2"><i class="fa-solid fa-envelope text-primary"></i> 
+      <b>Aedo@colegiokronos.cl</b>
+    </p>
+
+    <hr class="mx-auto" style="width:70%; border:1px solid #ffc107;">
+
+    <div class="course-list">
+      <p class="fw-bold text-dark mb-2">Cursos que enseña:</p>
+      <p class="mb-1">📘 Kinder A y B</p>
+      <p class="mb-1">📘 1ero A y B</p>
+      <p class="mb-1">📗 2do A y B</p>
+      <p class="mb-1">💻 3ero A y B</p>
+      <p class="mb-0">💻 4to A y B</p>
+    </div>
+  </div>
+</div>
+
+<!-- Profesor 3 -->
+<div class="col-md-4 mb-4">
+  <div class="card shadow-lg border-0 h-100 contact-card text-center p-3">
+    <img src="./public/profe paz.png" 
+         alt="Profesora Paz López" 
+         class="rounded-circle mb-3 contact-img mx-auto d-block"
+         style="width:130px; height:130px; object-fit:cover; border:4px solid #ffc107;">
+
+    <h4 class="card-title mt-2 text-dark">
+      👨‍🏫 <b>Paz López</b>
+    </h4>
+
+    <p class="text-muted mb-1"><i class="fa-solid fa-book"></i> Área: <b>Inglés</b> EM</p>
+    <p class="mb-2"><i class="fa-solid fa-envelope text-primary"></i> 
+      <b>Plopez@colegiokronos.cl</b>
+    </p>
+
+    <hr class="mx-auto" style="width:70%; border:1px solid #ffc107;">
+
+    <div class="course-list">
+      <p class="fw-bold text-dark mb-2">Cursos que enseña:</p>
+      <p class="mb-1">📘 8vo A y B</p>
+      <p class="mb-1">📘 1ero A y B</p>
+      <p class="mb-1">📗 2do A y B</p>
+    </div>
+  </div>
+</div>
+        
+  <!-- SCRIPT PARA MOSTRAR/OCULTAR SECCIONES -->
+  <script>
+    function mostrarSeccion(id) {
+      document.querySelectorAll("main section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

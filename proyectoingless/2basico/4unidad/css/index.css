@@ -1,0 +1,247 @@
+/* From Uiverse.io by akshat-patel28 */ 
+header {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+}
+.button-container {
+  display: flex;
+  background-color: rgb(0, 0, 0);
+  width: 250px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  box-shadow: rgba(30, 2, 70, 0.35) 0px 5px 15px,
+    rgba(139, 6, 255, 0.5) 5px 10px 15px;
+  position: relative;
+  z-index: 2;
+  margin-left: 40px; /* Mueve más a la derecha */
+}
+
+.button {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all ease-in-out 0.3s;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+    position: relative;
+  z-index: 2;
+}
+
+.icon {
+  font-size: 20px;
+    position: relative;
+  z-index: 2;
+}
+
+footer {
+/* From Uiverse.io by david-mohseni */ 
+.wrapper {
+  display: inline-flex;
+  list-style: none;
+  height: 120px;
+  width: 100%;
+  padding-top: 40px;
+  font-family: "Poppins", sans-serif;
+  justify-content: center;
+}
+
+.wrapper .icon {
+  position: relative;
+  background: #fff;
+  border-radius: 50%;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #fff;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #fff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.wrapper .icon:hover span,
+.wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper .facebook:hover,
+.wrapper .facebook:hover .tooltip,
+.wrapper .facebook:hover .tooltip::before {
+  background: #1877f2;
+  color: #fff;
+}
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+  background: #1da1f2;
+  color: #fff;
+}
+
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
+  color: #fff;
+}
+
+}
+
+#hero {
+   min-height: 100vh;
+   position: relative;
+}
+
+video {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+.capa {
+  position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: black;
+   opacity: 0.5;
+   mix-blend-mode: overlay;
+}
+
+/* From Uiverse.io by javadpg */ 
+.card1 {
+  background-color: rgb(0, 0, 0);
+  width: 140px;
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 2px 2px 19px;
+  z-index: 2;
+  margin: 0;
+   /* Elimina márgenes extra */
+}
+
+
+/* Contenedor para las cards en fila horizontal */
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 120px;   /* Aumenta este valor para bajar las cards */
+  margin-bottom: 40px; /* Espacio inferior opcional */
+}
+
+/* Ajusta los pseudoelementos al nuevo tamaño */
+.card1::before,
+.card1::after {
+  width: 152px;
+  height: 192px;
+  border-radius: 6px;
+}
+
+.card1::before {
+  content: "";
+  position: absolute;
+  z-index: -19;
+  width: 152px;
+  height: 192px;
+  margin: auto;
+  background: rgb(4,0,255);
+  background: linear-gradient(135deg, rgba(4,0,255,1) 0%, rgba(136,0,255,1) 35%, rgba(209,0,255,1) 100%);
+  border-radius: 6px;
+  
+}
+
+.card1::after {
+  content: "";
+  position: absolute;
+  z-index: -19;
+  width: 152px;
+  height: 192px;
+  margin: auto;
+  background: rgb(4,0,255);
+  background: linear-gradient(135deg, rgba(4,0,255,1) 0%, rgba(136,0,255,1) 35%, rgba(209,0,255,1) 100%);
+  border-radius: 6px;
+  filter: blur(20px);
+  transition: 2s;
+  
+}
+
+.card1:hover::after {
+  animation: cardafter 2.5s infinite forwards;
+}
+
+@keyframes cardafter {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

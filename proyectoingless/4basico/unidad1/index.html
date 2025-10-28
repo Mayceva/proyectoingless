@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Let's Learn Together</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      background: #18d5f7b6;
+      color: #333;
+    }
+
+    header {
+      background-color:  (blue);
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    nav {
+      background: #00f7d6;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #000000;
+    }
+
+    .emojis {
+      font-size: 2rem;
+    }
+
+    footer {
+      background: #0084ff;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .game-button {
+      display: inline-block;
+      background-color: #0044ff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .game-button:hover {
+      background-color: #4be4ff;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌈 Let's Learn Together</h1>
+    <p>Explore your physical states, emotions, in school</p>
+  </header>
+
+  <nav>
+    <a href="#physical states">Physical states</a>
+    <a href="#emotions">Emotions</a>
+    <a href="#school">School</a>
+  </nav>
+
+  <main>
+    <section id="physical states">
+      <div class="card">
+        <h2>🤷‍♂️ My physical state</h2>
+        <h3>😊 Feelings</h3>
+        <p>Discover what your moods can be</p>
+
+        <!-- physical states vocabulary -->
+        <h3>Basic physical states Vocabulary:</h3>
+        <ul>
+          <li><strong>Sick 🤒</strong> <em>(Enfermo/a)</em></li>
+          <li><strong>Cold 🥶</strong> <em>(Frío)</em></li>
+          <li><strong>Hot 🥵</strong> <em>(Calor)</em></li>
+          <li><strong>Hungry 🍽️</strong> <em>(Hambriento/a)</em></li>
+          <li><strong>Thirsty 🥤</strong> <em>(Sediento/a)</em></li>
+        </ul>
+
+        <!-- Redirect to family game -->
+        <a href="./animo/animo.html" class="game-button" target="_blank">Play physical state Game</a>
+      </div>
+    </section>
+
+    <section id="emotions">
+      <div class="card">
+        <h2>😊 Emotions</h2>
+        <div class="emojis">😀 😢 😡 😱 😍 😴</div>
+        <p>How do you feel today? All emotions are valid. You can talk about them with someone you trust.</p>
+
+        <!-- Emotions vocabulary -->
+        <h3>Basic Emotions Vocabulary:</h3>
+        <ul>
+          <li><strong>Happy</strong> <em>(Feliz)</em></li>
+          <li><strong>Sad</strong> <em>(Triste)</em></li>
+          <li><strong>Anger</strong> <em>(Enojo)</em></li>
+          <li><strong>Fear</strong> <em>(Miedo)</em></li>
+          <li><strong>Love</strong> <em>(Amor)</em></li>
+          <li><strong>Tired</strong> <em>(Cansado/a)</em></li>
+        </ul>
+
+        <!-- Redirect to emotions game -->
+        <a href="./emociones game.html" class="game-button" target="_blank">Play Emotions Game</a>
+      </div>
+    </section>
+
+    <section id="school">
+      <div class="card">
+        <h2>🏫 My School</h2>
+        <div class="grid">
+          <div>
+            <h3>📚 Classroom</h3>
+            <p>This is where we learn with our teacher or instructor. <em>(Aula)</em></p>
+          </div>
+          <div>
+            <h3>🏃 Playground</h3>
+            <p>A space to play, run, and share with friends. <em>(Patio)</em></p>
+          </div>
+          <div>
+            <h3>📖 Library</h3>
+            <p>A magical place full of books and stories. <em>(Biblioteca)</em></p>
+          </div>
+          <div>
+            <h3>🍽️ Cafeteria</h3>
+            <p>Where we eat and share special moments. <em>(Comedor)</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with 💖 for curious kids</p>
+  </footer>
+
+</body>
+</html>

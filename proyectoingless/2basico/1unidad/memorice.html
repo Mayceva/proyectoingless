@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animal Memory Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fce4ec;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    h1 {
+      color: #880e4f;
+      padding: 20px;
+    }
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      grid-gap: 15px;
+      justify-content: center;
+      padding-bottom: 40px;
+    }
+    .card {
+      width: 100px;
+      height: 100px;
+      background-color: #f8bbd0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .card.revealed {
+      color: #4a148c;
+      background-color: #fce4ec;
+      cursor: default;
+    }
+    footer {
+      background-color: #880e4f;
+      color: white;
+      padding: 15px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    button {
+      margin: 15px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ce93d8;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #ba68c8;
+    }
+    #winMessage {
+      display: none;
+      font-size: 28px;
+      color: #4a148c;
+      font-weight: bold;
+      margin-top: 20px;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎯 Memorize the Animals</h1>
+  <button onclick="startGame()">🔄 Restart Game</button>
+  <div class="game-board" id="gameBoard"></div>
+
+  <!-- Hidden Win Message -->
+  <div id="winMessage">Very good!! 🎉🎉</div>
+
+  <footer>&copy; 2025 English Games · Animal Memory</footer>
+
+  <script>
+    const animals = ["🐶 Dog", "🐱 Cat", "🐘 Elephant", "🦁 Lion", "🦓 Zebra", "🐵 Monkey", "🐸 Frog", "🐢 Turtle"];
+    let cards = [];
+    let firstCard = null;
+    let lockBoard = false;
+    let matches = 0;
+
+    function startGame() {
+      // Reset state
+      cards = [...animals, ...animals].sort(() => 0.5 - Math.random());
+      firstCard = null;
+      lockBoard = false;
+      matches = 0;
+      document.getElementById("winMessage").style.display = "none";
+
+      const board = document.getElementById("gameBoard");
+      board.innerHTML = "";
+
+      cards.forEach((animal) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.animal = animal;
+        card.innerHTML = animal;
+        card.addEventListener("click", () => revealCard(card));
+        board.appendChild(card);
+      });
+    }
+
+    function revealCard(card) {
+      if (lockBoard || card.classList.contains("revealed")) return;
+
+      card.classList.add("revealed");
+
+      if (!firstCard) {
+        firstCard = card;
+      } else {
+        if (firstCard.dataset.animal === card.dataset.animal) {
+          firstCard = null;
+          matches++;
+          checkWin();
+        } else {
+          lockBoard = true;
+          setTimeout(() => {
+            card.classList.remove("revealed");
+            firstCard.classList.remove("revealed");
+            firstCard = null;
+            lockBoard = false;
+          }, 1000);
+        }
+      }
+    }
+
+    function checkWin() {
+      if (matches === animals.length) {
+        document.getElementById("winMessage").style.display = "block";
+      }
+    }
+
+    // Start on load
+    startGame();
+  </script>
+
+</body>
+</html>
